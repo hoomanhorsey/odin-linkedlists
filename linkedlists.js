@@ -114,16 +114,112 @@ function createLinkedList(name, headNode = null, tailNode = null) {
         previous = current;
         current = current.next;
       }
-
+      linkedList.tailNode = previous;
       previous.next = null;
       console.log("pop");
       console.log(previous);
       console.log(linkedList.tailNode);
       console.log(current.next);
     },
-    contains(value) {},
-    find(value) {},
-    tostring() {},
+    contains(value) {
+      let current = linkedList.headNode;
+
+      console.log(current.value);
+
+      while (current.next !== null) {
+        if (current.value !== value) {
+          current = current.next;
+        } else {
+          console.log("found one");
+          console.log(current);
+          console.log(value);
+          return true;
+        }
+      }
+      console.log("not in list");
+
+      return false;
+    },
+    find(value) {
+      let current = linkedList.headNode;
+      let i = 0;
+      console.log(current.value);
+
+      while (current.next !== null) {
+        if (current.value !== value) {
+          current = current.next;
+          i++;
+        } else {
+          console.log("found one");
+          console.log(current);
+          console.log(value);
+          console.log("index: " + i);
+
+          return i;
+        }
+      }
+      console.log("not in list");
+
+      return null;
+    },
+    tostring() {
+      let current = linkedList.headNode;
+      let string = "";
+
+      while (current.next !== null) {
+        string = string + `(${current.value}) -> `;
+        current = current.next;
+      }
+      string = string + `(${current.value}) -> ` + "null";
+      console.log(string);
+    },
+    insertAt(value, index) {
+      let current = linkedList.headNode;
+      let i = 0;
+      const node = createNode(value);
+      let previous;
+
+      if (index === 0) {
+        linkedList.headNode = node;
+        node.next = current;
+      } else {
+        while (i !== index) {
+          previous = current;
+          console.log("current node");
+          console.log(current);
+          current = current.next;
+
+          console.log(current);
+          i++;
+        }
+        console.log("*************************");
+        console.log(previous);
+
+        console.log(current);
+
+        console.log("*************************");
+        console.log(linkedList.tailNode);
+        linkedList.tailNode;
+        if (previous === linkedList.tailNode) {
+          previous.next = node;
+          linkedList.tailNode = node;
+          node.next = null;
+        } else {
+          console.log("previous " + previous);
+          console.log(node);
+
+          previous.next = node;
+          node.next = current;
+        }
+      }
+    },
+    removeAt(index) {
+      let current = linkedList.headNode;
+      let i = 0;
+      let previous;
+
+      while (i !== index) {}
+    },
   };
 }
 
@@ -186,7 +282,31 @@ console.log("size calc");
 
 console.log(linkedList.size());
 
+// deleting crispy node
 console.log(linkedList.pop());
 
 console.log("size calc again after pop");
 console.log(linkedList.size());
+
+console.log(linkedList.contains("nubileNode"));
+console.log(linkedList.contains("mickey Mouse"));
+
+console.log(linkedList.find("nubileNode"));
+console.log(linkedList.find("mickey Mouse"));
+
+linkedList.tostring();
+
+console.log(linkedList.insertAt("spikyNode", 3));
+linkedList.tostring();
+
+console.log(linkedList.insertAt("stickyNode", 0));
+linkedList.tostring();
+
+console.log(linkedList.insertAt("smillyNode", 7));
+linkedList.tostring();
+console.log(linkedList.size());
+
+console.log("headNode ");
+console.log(linkedList.headNode);
+console.log("tailNode ");
+console.log(linkedList.tailNode);
