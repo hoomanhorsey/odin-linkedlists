@@ -214,11 +214,37 @@ function createLinkedList(name, headNode = null, tailNode = null) {
       }
     },
     removeAt(index) {
+      console.log("****** removeAt() ****");
+
       let current = linkedList.headNode;
       let i = 0;
       let previous;
 
-      while (i !== index) {}
+      if (index === 0) {
+        linkedList.headNode = current.next;
+      } else {
+        while (i !== index) {
+          console.log;
+          previous = current;
+          current = current.next;
+          i++;
+        }
+        if (current === linkedList.tailNode) {
+          console.log("found tail");
+
+          linkedList.tailNode = previous;
+          previous.next = null;
+        } else {
+          console.log("prev");
+
+          console.log(previous);
+
+          console.log("current");
+          console.log(current);
+
+          previous.next = current.next;
+        }
+      }
     },
   };
 }
@@ -270,10 +296,6 @@ console.log(linkedList.headNode);
 console.log("tailNode ");
 console.log(linkedList.tailNode);
 
-// console.log(hairyNode);
-// console.log(svelteNode);
-// console.log(nubileNode);
-
 console.log("indexed at 2");
 
 console.log(linkedList.at(2));
@@ -310,3 +332,14 @@ console.log("headNode ");
 console.log(linkedList.headNode);
 console.log("tailNode ");
 console.log(linkedList.tailNode);
+
+linkedList.removeAt(6);
+
+console.log("headNode ");
+console.log(linkedList.headNode);
+console.log("tailNode ");
+console.log(linkedList.tailNode);
+linkedList.tostring();
+
+// console.log(linkedList.find("velvetNode"));
+// console.log(linkedList.find("slipperyNode"));
